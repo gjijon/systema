@@ -178,7 +178,7 @@ public class SegUsuario implements Serializable {
 
     @Override
     public String toString() {
-        return "com.airhacks.SegUsuario[ usuId=" + usuId + " ]";
+        return "SegUsuario[ usuId=" + usuId + " ]";
     }
 
 }

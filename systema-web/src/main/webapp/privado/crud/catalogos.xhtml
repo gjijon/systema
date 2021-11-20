@@ -21,14 +21,12 @@
             </p:toolbar>
             <p:separator/>
             <div class="ui-fluid">
-                <p:panelGrid columns="4" columnClasses="ui-g-12 ui-md-2,ui-g-12 ui-md-4,ui-g-12 ui-md-2,ui-g-12 ui-md-4" layout="grid" styleClass="ui-panelgrid-blank ui-fluid">
-                    <p:panelGrid columns="2" id="ingreso" >
-                        <p:outputLabel for="nombreCatalogo" styleClass="p-d-block">Nombre</p:outputLabel>
-                        <p:inputText id="nombreCatalogo" value="#{controladorInicio.admCatalogoNuevo.catNombre}" styleClass="p-d-block"/>
+                <p:panelGrid columns="2" id="ingreso" columnClasses="ui-g-12 ui-md-2,ui-g-12 ui-md-4,ui-g-12 ui-md-2,ui-g-12 ui-md-4" layout="grid" styleClass="ui-panelgrid-blank ui-fluid">
+                    <p:outputLabel for="nombreCatalogo" styleClass="p-d-block">Nombre</p:outputLabel>
+                    <p:inputText id="nombreCatalogo" value="#{controladorInicio.admCatalogoNuevo.catNombre}" styleClass="p-d-block"/>
 
-                        <p:outputLabel for="descripcionCatalogo" styleClass="p-d-block">Descripción</p:outputLabel>
-                        <p:inputText id="descripcionCatalogo" value="#{controladorInicio.admCatalogoNuevo.catDescripcion}" styleClass="p-d-block"/>
-                    </p:panelGrid>
+                    <p:outputLabel for="descripcionCatalogo" styleClass="p-d-block">Descripción</p:outputLabel>
+                    <p:inputText id="descripcionCatalogo" value="#{controladorInicio.admCatalogoNuevo.catDescripcion}" styleClass="p-d-block"/>
                 </p:panelGrid>
 
                 <p:separator/>
@@ -53,10 +51,16 @@
                                          process="formulario:catalogos"
                                          update="formulario:catalogos" style="width: 32px;">
                             <f:setPropertyActionListener value="#{catalogo}" target="#{controladorInicio.admCatalogoABorrar}" />
+                            <p:confirm header="Confirmacion" message="Está seguro de borrar este registro?" icon="pi pi-exclamation-triangle" />
                         </p:commandButton>
                     </p:column>
                 </p:dataTable>
             </div>
+
+            <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="pi pi-check" />
+                <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="pi pi-times" />
+            </p:confirmDialog>
         </h:form>
 
     </ui:define>

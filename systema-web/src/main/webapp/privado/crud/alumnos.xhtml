@@ -21,44 +21,42 @@
             </p:toolbar>
             <p:separator/>
             <div class="ui-fluid">
-                <p:panelGrid columns="4" columnClasses="ui-g-12 ui-md-2,ui-g-12 ui-md-4,ui-g-12 ui-md-2,ui-g-12 ui-md-4" layout="grid" styleClass="ui-panelgrid-blank ui-fluid">
-                    <p:panelGrid columns="2" id="ingreso" >
-                        <p:outputLabel for="identificacion" styleClass="p-d-block">Identificación</p:outputLabel>
-                        <p:inputText id="identificacion" value="#{controladorAlumnos.acaAlumnoNuevo.alnIdentificacion}" styleClass="p-d-block"/>
+                <p:panelGrid columns="2" id="ingreso" columnClasses="ui-g-12 ui-md-2,ui-g-12 ui-md-4,ui-g-12 ui-md-2,ui-g-12 ui-md-4" layout="grid" styleClass="ui-panelgrid-blank ui-fluid">
+                    <p:outputLabel for="identificacion" styleClass="p-d-block">Identificación</p:outputLabel>
+                    <p:inputText id="identificacion" value="#{controladorAlumnos.acaAlumnoNuevo.alnIdentificacion}" styleClass="p-d-block"/>
 
-                        <p:outputLabel for="nombre" styleClass="p-d-block">Nombre</p:outputLabel>
-                        <p:inputText id="nombre" value="#{controladorAlumnos.acaAlumnoNuevo.alnNombre}" styleClass="p-d-block"/>
+                    <p:outputLabel for="nombre" styleClass="p-d-block">Nombre</p:outputLabel>
+                    <p:inputText id="nombre" value="#{controladorAlumnos.acaAlumnoNuevo.alnNombre}" styleClass="p-d-block"/>
 
-                        <p:outputLabel for="apellido" styleClass="p-d-block">Apellido</p:outputLabel>
-                        <p:inputText id="apellido" value="#{controladorAlumnos.acaAlumnoNuevo.alnApellido}" styleClass="p-d-block"/>
+                    <p:outputLabel for="apellido" styleClass="p-d-block">Apellido</p:outputLabel>
+                    <p:inputText id="apellido" value="#{controladorAlumnos.acaAlumnoNuevo.alnApellido}" styleClass="p-d-block"/>
 
-                        <p:outputLabel for="direccion" styleClass="p-d-block">Dirección</p:outputLabel>
-                        <p:inputText id="direccion" value="#{controladorAlumnos.acaAlumnoNuevo.alnDireccion}" styleClass="p-d-block"/>
+                    <p:outputLabel for="direccion" styleClass="p-d-block">Dirección</p:outputLabel>
+                    <p:inputText id="direccion" value="#{controladorAlumnos.acaAlumnoNuevo.alnDireccion}" styleClass="p-d-block"/>
 
-                        <p:outputLabel for="correo" styleClass="p-d-block">Correo</p:outputLabel>
-                        <p:inputText id="correo" value="#{controladorAlumnos.acaAlumnoNuevo.alnCorreo}" styleClass="p-d-block"/>
+                    <p:outputLabel for="correo" styleClass="p-d-block">Correo</p:outputLabel>
+                    <p:inputText id="correo" value="#{controladorAlumnos.acaAlumnoNuevo.alnCorreo}" styleClass="p-d-block"/>
 
-                        <p:outputLabel for="telefono" styleClass="p-d-block">Teléfono</p:outputLabel>
-                        <p:inputText id="telefono" value="#{controladorAlumnos.acaAlumnoNuevo.alnTelefono}" styleClass="p-d-block"/>
+                    <p:outputLabel for="telefono" styleClass="p-d-block">Teléfono</p:outputLabel>
+                    <p:inputText id="telefono" value="#{controladorAlumnos.acaAlumnoNuevo.alnTelefono}" styleClass="p-d-block"/>
 
-                        <p:outputLabel for="usuario" styleClass="p-d-block">Usuario relacionado</p:outputLabel>
-                        <p:selectOneMenu id="usuario" value="#{controladorAlumnos.usuarioAsociadoParaNuevo}">
-                            <f:selectItem itemLabel="Seleccione Uno" itemValue="" />
-                            <f:selectItems value="#{controladorAlumnos.usuarios}" var="usuario" itemLabel="#{usuario.usuUsuario}" itemValue="#{usuario}"  />
+                    <p:outputLabel for="usuario" styleClass="p-d-block">Usuario relacionado</p:outputLabel>
+                    <p:selectOneMenu id="usuario" value="#{controladorAlumnos.usuarioAsociadoParaNuevo}" converter="omnifaces.SelectItemsConverter">
+                        <f:selectItem itemLabel="Seleccione Uno" itemValue="" />
+                        <f:selectItems value="#{controladorAlumnos.usuarios}" var="usuario" itemLabel="#{usuario.usuUsuario}" itemValue="#{usuario}"  />
 
-                            <p:column style="width:10%">
-                                <h:graphicImage name="showcase/images/themeswitcher/themeswitcher-#{t.name}.png" alt="#{t.name}" styleClass="ui-theme" />
-                            </p:column>
+                        <p:column style="width:10%">
+                            <h:graphicImage name="showcase/images/themeswitcher/themeswitcher-#{t.name}.png" alt="#{t.name}" styleClass="ui-theme" />
+                        </p:column>
 
-                            <p:column>
-                                <h:outputText value="#{usuario.usuUsuario}" />
-                            </p:column>
+                        <p:column>
+                            <h:outputText value="#{usuario.usuUsuario}" />
+                        </p:column>
 
-                        </p:selectOneMenu>
+                    </p:selectOneMenu>
 
-                        <p:outputLabel for="estado" styleClass="p-d-block">Activo</p:outputLabel>
-                        <p:selectBooleanButton id="estado" value="#{controladorAlumnos.acaAlumnoNuevo.alnEstado}" onLabel="Si" offLabel="No" style="width:60px" />
-                    </p:panelGrid>
+                    <p:outputLabel for="estado" styleClass="p-d-block">Activo</p:outputLabel>
+                    <p:selectBooleanButton id="estado" value="#{controladorAlumnos.acaAlumnoNuevo.alnEstado}" onLabel="Si" offLabel="No" style="width:60px" />
                 </p:panelGrid>
 
                 <p:separator/>
@@ -70,7 +68,7 @@
                     <p:ajax event="rowUnselect" listener="#{controladorAlumnos.onRowUnselect}" update="formulario" />
 
                     <p:column headerText="ID">
-                        <h:outputText value="#{alumno.catId}" />
+                        <h:outputText value="#{alumno.alnCodigo}" />
                     </p:column>
                     <p:column headerText="NOMBRES y APELLIDOS">
                         <h:outputText value="#{alumno.alnNombre} #{alumno.alnApellido}" />
@@ -88,11 +86,17 @@
                         <p:commandButton icon="pi pi-minus" title="Borrar" action="#{controladorAlumnos.borrar}"
                                          process="formulario:catalogos"
                                          update="formulario:catalogos" style="width: 32px;">
-                            <f:setPropertyActionListener value="#{catalogo}" target="#{controladorAlumnos.acaAlumnoABorrar}" />
+                            <f:setPropertyActionListener value="#{alumno}" target="#{controladorAlumnos.acaAlumnoABorrar}" />
+                            <p:confirm header="Confirmacion" message="Está seguro de borrar este registro?" icon="pi pi-exclamation-triangle" />
                         </p:commandButton>
                     </p:column>
                 </p:dataTable>
             </div>
+
+            <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="pi pi-check" />
+                <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="pi pi-times" />
+            </p:confirmDialog>
         </h:form>
 
     </ui:define>

@@ -131,7 +131,7 @@ public class AdmCatalogoDetalle implements Serializable {
 
     @Override
     public String toString() {
-        return "com.airhacks.AdmCatalogoDetalle[ catdetId=" + catdetId + " ]";
+        return "AdmCatalogoDetalle[ catdetId=" + catdetId + " ]";
     }
 
 }

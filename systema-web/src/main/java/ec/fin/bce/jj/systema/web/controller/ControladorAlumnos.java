@@ -13,6 +13,8 @@ import ec.fin.bce.ja.systema.persistencia.entities.seguridad.SegUsuario;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
 import java.io.Serializable;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -66,6 +68,9 @@ public class ControladorAlumnos implements Serializable {
 
     public void guardar() {
         try {
+            acaAlumnoNuevo.setSegUsuario(usuarioAsociadoParaNuevo);
+            acaAlumnoNuevo.setAlnFechaActualiza(Timestamp.valueOf(LocalDateTime.now()));
+            usuarioAsociadoParaNuevo.setAlumno(acaAlumnoNuevo);
             if (acaAlumnoSeleccionado == null) {
                 alumnoFacade.create(acaAlumnoNuevo);
 
@@ -75,9 +80,7 @@ public class ControladorAlumnos implements Serializable {
 
             FacesContext.getCurrentInstance().addMessage("Guardando", new FacesMessage(FacesMessage.SEVERITY_INFO, "Guardado", "Guardando Alumno"));
 
-            acaAlumnoNuevo = new AcaAlumno();
-            acaAlumnoSeleccionado = null;
-            alumnos = alumnoFacade.findAll();
+            reset();
         } catch (Exception e) {
             LOG.log(Level.SEVERE, "error", e);
             FacesContext.getCurrentInstance().addMessage("Error guardando", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error", "Guardando Alumno"));
@@ -86,6 +89,9 @@ public class ControladorAlumnos implements Serializable {
 
     private void reset() {
         acaAlumnoNuevo = new AcaAlumno();
+        acaAlumnoSeleccionado = null;
+        alumnos = alumnoFacade.findAll();
+        usuarioAsociadoParaNuevo = null;
     }
 
     public void borrar() {
@@ -103,6 +109,7 @@ public class ControladorAlumnos implements Serializable {
         mensaje.setSummary("Alumno");
         FacesContext.getCurrentInstance().addMessage("Seleccionado", mensaje);
         acaAlumnoSeleccionado = event.getObject();
+        usuarioAsociadoParaNuevo = acaAlumnoSeleccionado.getSegUsuario();
         acaAlumnoNuevo = event.getObject();
     }
 
