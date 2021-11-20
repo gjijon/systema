@@ -1,186 +1,187 @@
 package ec.fin.bce.ja.systema.persistencia.entities.academico;
 
+import ec.fin.bce.ja.systema.persistencia.entities.seguridad.SegUsuario;
 import java.io.Serializable;
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.List;
 
-
 /**
  * The persistent class for the "aca_alumno" database table.
- * 
+ *
  */
 @Entity
-@Table(name="aca_alumno")
-@NamedQuery(name="AcaAlumno.findAll", query="SELECT a FROM AcaAlumno a")
+@Table(name = "aca_alumno", schema = "academico")
+@NamedQuery(name = "AcaAlumno.findAll", query = "SELECT a FROM AcaAlumno a")
 public class AcaAlumno implements Serializable {
-	private static final long serialVersionUID = 1L;
 
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="aln_codigo")
-	private int alnCodigo;
+    private static final long serialVersionUID = 1L;
 
-	@Column(name="aln_apellido")
-	private String alnApellido;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "aln_codigo")
+    private int alnCodigo;
 
-	@Column(name="aln_correo")
-	private String alnCorreo;
+    @Column(name = "aln_apellido")
+    private String alnApellido;
 
-	@Column(name="aln_direccion")
-	private String alnDireccion;
+    @Column(name = "aln_correo")
+    private String alnCorreo;
 
-	@Column(name="aln_estado")
-	private boolean alnEstado;
+    @Column(name = "aln_direccion")
+    private String alnDireccion;
 
-	@Column(name="aln_fecha_actualiza")
-	private Timestamp alnFechaActualiza;
+    @Column(name = "aln_estado")
+    private boolean alnEstado;
 
-	@Column(name="aln_identificacion")
-	private String alnIdentificacion;
+    @Column(name = "aln_fecha_actualiza")
+    private Timestamp alnFechaActualiza;
 
-	@Column(name="aln_nombre")
-	private String alnNombre;
+    @Column(name = "aln_identificacion")
+    private String alnIdentificacion;
 
-	@Column(name="aln_telefono")
-	private String alnTelefono;
+    @Column(name = "aln_nombre")
+    private String alnNombre;
 
-	@Column(name="usu_codigo")
-	private int usuCodigo;
+    @Column(name = "aln_telefono")
+    private String alnTelefono;
 
-	//bi-directional many-to-one association to AcaMatricula
-	@OneToMany(mappedBy="acaAlumno")
-	private List<AcaMatricula> acaMatriculas;
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "usuario")
+    private SegUsuario segUsuario;
 
-	//bi-directional many-to-one association to AcaNota
-	@OneToMany(mappedBy="acaAlumno")
-	private List<AcaNota> acaNotas;
+    //bi-directional many-to-one association to AcaMatricula
+    @OneToMany(mappedBy = "acaAlumno")
+    private List<AcaMatricula> acaMatriculas;
 
-	public AcaAlumno() {
-	}
+    //bi-directional many-to-one association to AcaNota
+    @OneToMany(mappedBy = "acaAlumno")
+    private List<AcaNota> acaNotas;
 
-	public int getAlnCodigo() {
-		return this.alnCodigo;
-	}
+    public AcaAlumno() {
+    }
 
-	public void setAlnCodigo(int alnCodigo) {
-		this.alnCodigo = alnCodigo;
-	}
+    public int getAlnCodigo() {
+        return this.alnCodigo;
+    }
 
-	public String getAlnApellido() {
-		return this.alnApellido;
-	}
+    public void setAlnCodigo(int alnCodigo) {
+        this.alnCodigo = alnCodigo;
+    }
 
-	public void setAlnApellido(String alnApellido) {
-		this.alnApellido = alnApellido;
-	}
+    public String getAlnApellido() {
+        return this.alnApellido;
+    }
 
-	public String getAlnCorreo() {
-		return this.alnCorreo;
-	}
+    public void setAlnApellido(String alnApellido) {
+        this.alnApellido = alnApellido;
+    }
 
-	public void setAlnCorreo(String alnCorreo) {
-		this.alnCorreo = alnCorreo;
-	}
+    public String getAlnCorreo() {
+        return this.alnCorreo;
+    }
 
-	public String getAlnDireccion() {
-		return this.alnDireccion;
-	}
+    public void setAlnCorreo(String alnCorreo) {
+        this.alnCorreo = alnCorreo;
+    }
 
-	public void setAlnDireccion(String alnDireccion) {
-		this.alnDireccion = alnDireccion;
-	}
+    public String getAlnDireccion() {
+        return this.alnDireccion;
+    }
 
-	public boolean getAlnEstado() {
-		return this.alnEstado;
-	}
+    public void setAlnDireccion(String alnDireccion) {
+        this.alnDireccion = alnDireccion;
+    }
 
-	public void setAlnEstado(boolean alnEstado) {
-		this.alnEstado = alnEstado;
-	}
+    public boolean getAlnEstado() {
+        return this.alnEstado;
+    }
 
-	public Timestamp getAlnFechaActualiza() {
-		return this.alnFechaActualiza;
-	}
+    public void setAlnEstado(boolean alnEstado) {
+        this.alnEstado = alnEstado;
+    }
 
-	public void setAlnFechaActualiza(Timestamp alnFechaActualiza) {
-		this.alnFechaActualiza = alnFechaActualiza;
-	}
+    public Timestamp getAlnFechaActualiza() {
+        return this.alnFechaActualiza;
+    }
 
-	public String getAlnIdentificacion() {
-		return this.alnIdentificacion;
-	}
+    public void setAlnFechaActualiza(Timestamp alnFechaActualiza) {
+        this.alnFechaActualiza = alnFechaActualiza;
+    }
 
-	public void setAlnIdentificacion(String alnIdentificacion) {
-		this.alnIdentificacion = alnIdentificacion;
-	}
+    public String getAlnIdentificacion() {
+        return this.alnIdentificacion;
+    }
 
-	public String getAlnNombre() {
-		return this.alnNombre;
-	}
+    public void setAlnIdentificacion(String alnIdentificacion) {
+        this.alnIdentificacion = alnIdentificacion;
+    }
 
-	public void setAlnNombre(String alnNombre) {
-		this.alnNombre = alnNombre;
-	}
+    public String getAlnNombre() {
+        return this.alnNombre;
+    }
 
-	public String getAlnTelefono() {
-		return this.alnTelefono;
-	}
+    public void setAlnNombre(String alnNombre) {
+        this.alnNombre = alnNombre;
+    }
 
-	public void setAlnTelefono(String alnTelefono) {
-		this.alnTelefono = alnTelefono;
-	}
+    public String getAlnTelefono() {
+        return this.alnTelefono;
+    }
 
-	public int getUsuCodigo() {
-		return this.usuCodigo;
-	}
+    public void setAlnTelefono(String alnTelefono) {
+        this.alnTelefono = alnTelefono;
+    }
 
-	public void setUsuCodigo(int usuCodigo) {
-		this.usuCodigo = usuCodigo;
-	}
+    public SegUsuario getSegUsuario() {
+        return segUsuario;
+    }
 
-	public List<AcaMatricula> getAcaMatriculas() {
-		return this.acaMatriculas;
-	}
+    public void setSegUsuario(SegUsuario segUsuario) {
+        this.segUsuario = segUsuario;
+    }
 
-	public void setAcaMatriculas(List<AcaMatricula> acaMatriculas) {
-		this.acaMatriculas = acaMatriculas;
-	}
+    public List<AcaMatricula> getAcaMatriculas() {
+        return this.acaMatriculas;
+    }
 
-	public AcaMatricula addAcaMatricula(AcaMatricula acaMatricula) {
-		getAcaMatriculas().add(acaMatricula);
-		acaMatricula.setAcaAlumno(this);
+    public void setAcaMatriculas(List<AcaMatricula> acaMatriculas) {
+        this.acaMatriculas = acaMatriculas;
+    }
 
-		return acaMatricula;
-	}
+    public AcaMatricula addAcaMatricula(AcaMatricula acaMatricula) {
+        getAcaMatriculas().add(acaMatricula);
+        acaMatricula.setAcaAlumno(this);
 
-	public AcaMatricula removeAcaMatricula(AcaMatricula acaMatricula) {
-		getAcaMatriculas().remove(acaMatricula);
-		acaMatricula.setAcaAlumno(null);
+        return acaMatricula;
+    }
 
-		return acaMatricula;
-	}
+    public AcaMatricula removeAcaMatricula(AcaMatricula acaMatricula) {
+        getAcaMatriculas().remove(acaMatricula);
+        acaMatricula.setAcaAlumno(null);
 
-	public List<AcaNota> getAcaNotas() {
-		return this.acaNotas;
-	}
+        return acaMatricula;
+    }
 
-	public void setAcaNotas(List<AcaNota> acaNotas) {
-		this.acaNotas = acaNotas;
-	}
+    public List<AcaNota> getAcaNotas() {
+        return this.acaNotas;
+    }
 
-	public AcaNota addAcaNota(AcaNota acaNota) {
-		getAcaNotas().add(acaNota);
-		acaNota.setAcaAlumno(this);
+    public void setAcaNotas(List<AcaNota> acaNotas) {
+        this.acaNotas = acaNotas;
+    }
 
-		return acaNota;
-	}
+    public AcaNota addAcaNota(AcaNota acaNota) {
+        getAcaNotas().add(acaNota);
+        acaNota.setAcaAlumno(this);
 
-	public AcaNota removeAcaNota(AcaNota acaNota) {
-		getAcaNotas().remove(acaNota);
-		acaNota.setAcaAlumno(null);
+        return acaNota;
+    }
 
-		return acaNota;
-	}
+    public AcaNota removeAcaNota(AcaNota acaNota) {
+        getAcaNotas().remove(acaNota);
+        acaNota.setAcaAlumno(null);
+
+        return acaNota;
+    }
 
 }

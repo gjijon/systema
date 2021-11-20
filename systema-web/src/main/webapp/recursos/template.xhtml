@@ -3,6 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
       xmlns:p="http://primefaces.org/ui">
 
     <h:head>
@@ -22,8 +23,8 @@
             <div id="content" class="left_content">
                 <h:form>
                     <p:menubar >
-                        <p:menuitem value="Tipo Catalogo (una entidad)" action="catalogos.xhtml?faces-redirect=true" icon="pi pi-sitemap" />
-                        <p:menuitem value="Usuarios (entidad relacionada)" url="http://www.primefaces.org" icon="pi pi-users" />
+                        <p:menuitem value="Tipo Catalogo (una entidad)" action="catalogos.bce?faces-redirect=true" icon="pi pi-sitemap" />
+                        <p:menuitem value="Alumnos (entidad relacionada)" action="alumnos.bce?faces-redirect=true" icon="pi pi-users" />
                         <p:submenu label="Consultas (JPQL + Criteria)" icon="pi pi-file-o">
                             <p:menuitem value="Notas" url="http://www.primefaces.org" icon="pi pi-clone" />
                             <p:menuitem value="Materias" url="http://www.primefaces.org" icon="pi pi-clone" />
@@ -31,6 +32,10 @@
                             <p:menuitem value="Alumnos" url="http://www.primefaces.org" icon="pi pi-clone" />
                             <p:menuitem value="Usuarios" url="http://www.primefaces.org" icon="pi pi-clone" />
                         </p:submenu>
+
+                        <f:facet name="options">
+                            <p:linkButton outcome="/inicio" value="Salir" icon="pi pi-home"  style="margin: auto auto auto auto;"></p:linkButton>
+                        </f:facet>
                     </p:menubar>
                 </h:form>
                 <p:growl id="growl" life="2000" showDetail="true">

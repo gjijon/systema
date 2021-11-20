@@ -5,6 +5,7 @@
  */
 package ec.fin.bce.ja.systema.persistencia.entities.seguridad;
 
+import ec.fin.bce.ja.systema.persistencia.entities.academico.AcaAlumno;
 import ec.fin.bce.ja.systema.persistencia.entities.administracion.AdmCatalogoDetalle;
 import java.io.Serializable;
 import java.util.Date;
@@ -68,6 +69,10 @@ public class SegUsuario implements Serializable {
     @JoinColumn(name = "per_id", referencedColumnName = "per_id")
     @OneToOne(optional = false)
     private SegPersona perId;
+
+    @JoinColumn(name = "usu_codigo", referencedColumnName = "usu_codigo")
+    @OneToOne(optional = false)
+    private AcaAlumno usuario;
 
     @JoinColumn(name = "catdet_tipo_usuario_fk", referencedColumnName = "catdet_id")
     @ManyToOne(optional = false)
@@ -141,6 +146,14 @@ public class SegUsuario implements Serializable {
 
     public void setPerId(SegPersona perId) {
         this.perId = perId;
+    }
+
+    public AcaAlumno getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(AcaAlumno usuario) {
+        this.usuario = usuario;
     }
 
     @Override

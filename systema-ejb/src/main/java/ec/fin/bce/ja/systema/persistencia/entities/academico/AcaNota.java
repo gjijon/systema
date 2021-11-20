@@ -11,7 +11,7 @@ import java.sql.Timestamp;
  * 
  */
 @Entity
-@Table(name="aca_notas")
+@Table(name="aca_notas", schema = "academico")
 @NamedQuery(name="AcaNota.findAll", query="SELECT a FROM AcaNota a")
 public class AcaNota implements Serializable {
 	private static final long serialVersionUID = 1L;

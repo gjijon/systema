@@ -8,7 +8,7 @@
                 template="./../../recursos/template.xhtml">
 
     <f:metadata>
-        <f:event type="preRenderView" listener="#{sessionManagedBean.setPantallaActual('Catálogos')}"/>
+        <f:event type="preRenderView" listener="#{sessionManagedBean.setPantallaActual('Manipular Alumnos (entidad relacionada)')}"/>
     </f:metadata>
 
 
@@ -16,46 +16,40 @@
         <h:form id="formulario">
             <p:toolbar>
                 <p:toolbarGroup align="left">
-                    <p:commandButton value="Guardar" action="#{controladorInicio.guardar}" update="formulario" icon="pi pi-save"  />
+                    <p:commandButton value="Guardar" action="#{controladorAlumnos.guardar}" update="formulario" icon="pi pi-save"  />
                 </p:toolbarGroup>
             </p:toolbar>
             <p:separator/>
             <div class="ui-fluid">
                 <p:panelGrid columns="4" columnClasses="ui-g-12 ui-md-2,ui-g-12 ui-md-4,ui-g-12 ui-md-2,ui-g-12 ui-md-4" layout="grid" styleClass="ui-panelgrid-blank ui-fluid">
                     <p:panelGrid columns="2" id="ingreso" >
-                        <p:outputLabel for="nombreCatalogo" styleClass="p-d-block">Nombre</p:outputLabel>
-                        <p:inputText id="nombreCatalogo" value="#{controladorInicio.admCatalogoNuevo.catNombre}" styleClass="p-d-block"/>
+                        <p:outputLabel for="identificacion" styleClass="p-d-block">Identificación</p:outputLabel>
+                        <p:inputText id="identificacion" value="#{controladorAlumnos.acaAlumnoNuevo.alnIdentificacion}" styleClass="p-d-block"/>
 
-                        <p:outputLabel for="descripcionCatalogo" styleClass="p-d-block">Descripción</p:outputLabel>
-                        <p:inputText id="descripcionCatalogo" value="#{controladorInicio.admCatalogoNuevo.catDescripcion}" styleClass="p-d-block"/>
+                        <p:outputLabel for="nombre" styleClass="p-d-block">Nombre</p:outputLabel>
+                        <p:inputText id="nombre" value="#{controladorAlumnos.acaAlumnoNuevo.alnNombre}" styleClass="p-d-block"/>
+
+                        <p:outputLabel for="apellido" styleClass="p-d-block">Apellido</p:outputLabel>
+                        <p:inputText id="apellido" value="#{controladorAlumnos.acaAlumnoNuevo.alnApellido}" styleClass="p-d-block"/>
+
+                        <p:outputLabel for="direccion" styleClass="p-d-block">Dirección</p:outputLabel>
+                        <p:inputText id="direccion" value="#{controladorAlumnos.acaAlumnoNuevo.alnDireccion}" styleClass="p-d-block"/>
+
+                        <p:outputLabel for="correo" styleClass="p-d-block">Correo</p:outputLabel>
+                        <p:inputText id="correo" value="#{controladorAlumnos.acaAlumnoNuevo.alnCorreo}" styleClass="p-d-block"/>
+
+                        <p:outputLabel for="telefono" styleClass="p-d-block">Teléfono</p:outputLabel>
+                        <p:inputText id="telefono" value="#{controladorAlumnos.acaAlumnoNuevo.alnTelefono}" styleClass="p-d-block"/>
+
+                        <p:outputLabel for="usuario" styleClass="p-d-block">Código</p:outputLabel>
+                        <p:inputText id="usuario" value="#{controladorAlumnos.acaAlumnoNuevo.alnCodigo}" styleClass="p-d-block"/>
+
+                        <p:outputLabel for="estado" styleClass="p-d-block">Estado</p:outputLabel>
+                        <p:inputText id="estado" value="#{controladorAlumnos.acaAlumnoNuevo.alnEstado}" styleClass="p-d-block"/>
                     </p:panelGrid>
                 </p:panelGrid>
 
-                <p:separator/>
-
-                <p:dataTable id="catalogos" var="catalogo" value="#{controladorInicio.admCatalogos}" rowKey="#{catalogo.catId}"
-                             selection="#{controladorInicio.admCatalogoSeleccionado}" selectionMode="single" reflow="true">
-
-                    <p:ajax event="rowSelect" listener="#{controladorInicio.onRowSelect}" update="formulario" />
-                    <p:ajax event="rowUnselect" listener="#{controladorInicio.onRowUnselect}" update="formulario" />
-
-                    <p:column headerText="ID">
-                        <h:outputText value="#{catalogo.catId}" />
-                    </p:column>
-                    <p:column headerText="NOMBRE">
-                        <h:outputText value="#{catalogo.catNombre}" />
-                    </p:column>
-                    <p:column headerText="DESCRIPCION">
-                        <h:outputText value="#{catalogo.catDescripcion}" />
-                    </p:column>
-                    <p:column>
-                        <p:commandButton icon="pi pi-minus" title="Borrar" action="#{controladorInicio.borrar}"
-                                         process="formulario:catalogos"
-                                         update="formulario:catalogos" style="width: 32px;">
-                            <f:setPropertyActionListener value="#{catalogo}" target="#{controladorInicio.admCatalogoABorrar}" />
-                        </p:commandButton>
-                    </p:column>
-                </p:dataTable>
+                
             </div>
         </h:form>
 
