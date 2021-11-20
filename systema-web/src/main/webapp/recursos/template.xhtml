@@ -1,0 +1,50 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>SystemaA</title>
+        <h:outputStylesheet name="primeicons/primeicons.css" library="primefaces"/>
+    </h:head>
+
+    <h:body>
+        <div id="top">
+
+        </div>
+        <div>
+            <div id="left">
+
+            </div>
+            <div id="content" class="left_content">
+                <h:form>
+                    <p:menubar >
+                        <p:menuitem value="Tipo Catalogo (una entidad)" action="catalogos.xhtml?faces-redirect=true" icon="pi pi-sitemap" />
+                        <p:menuitem value="Usuarios (entidad relacionada)" url="http://www.primefaces.org" icon="pi pi-users" />
+                        <p:submenu label="Consultas (JPQL + Criteria)" icon="pi pi-file-o">
+                            <p:menuitem value="Notas" url="http://www.primefaces.org" icon="pi pi-clone" />
+                            <p:menuitem value="Materias" url="http://www.primefaces.org" icon="pi pi-clone" />
+                            <p:menuitem value="Carreras" url="http://www.primefaces.org" icon="pi pi-clone" />
+                            <p:menuitem value="Alumnos" url="http://www.primefaces.org" icon="pi pi-clone" />
+                            <p:menuitem value="Usuarios" url="http://www.primefaces.org" icon="pi pi-clone" />
+                        </p:submenu>
+                    </p:menubar>
+                </h:form>
+                <p:growl id="growl" life="2000" showDetail="true">
+                    <p:autoUpdate />
+                </p:growl>
+                <p:separator/>
+                <p:panel header="#{sessionManagedBean.pantallaActual}" style="margin:20px 0px">
+                    <ui:insert name="content">Content</ui:insert>
+                </p:panel>
+            </div>
+        </div>
+        <div id="bottom">
+
+        </div>
+    </h:body>
+
+</html>

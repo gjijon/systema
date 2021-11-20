@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+  <persistence-unit name="systemAPU" transaction-type="JTA">
+    <jta-data-source>jdbc/SystemaRES</jta-data-source>
+    <class>ec.fin.bce.ja.systema.persistencia.entities.administracion.AdmCatalogo</class>
+    <class>ec.fin.bce.ja.systema.persistencia.entities.administracion.AdmCatalogoDetalle</class>
+    <class>ec.fin.bce.ja.systema.persistencia.entities.seguridad.SegPersona</class>
+    <class>ec.fin.bce.ja.systema.persistencia.entities.seguridad.SegUsuario</class>
+    <exclude-unlisted-classes>false</exclude-unlisted-classes>
+    <properties>
+        <property name="eclipselink.logging.level" value="FINE"/>
+        <property name="eclipselink.logging.parameters" value="true" />
+    </properties>
+  </persistence-unit>
+</persistence>
