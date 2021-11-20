@@ -1,0 +1,64 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                template="./../../recursos/template.xhtml">
+
+    <f:metadata>
+        <f:event type="preRenderView" listener="#{sessionManagedBean.setPantallaActual('Catálogos')}"/>
+    </f:metadata>
+
+
+    <ui:define name="content">
+        <h:form id="formulario">
+            <p:toolbar>
+                <p:toolbarGroup align="left">
+                    <p:commandButton value="Guardar" action="#{controladorInicio.guardar}" update="formulario" icon="pi pi-save"  />
+                </p:toolbarGroup>
+            </p:toolbar>
+            <p:separator/>
+            <div class="ui-fluid">
+                <p:panelGrid columns="4" columnClasses="ui-g-12 ui-md-2,ui-g-12 ui-md-4,ui-g-12 ui-md-2,ui-g-12 ui-md-4" layout="grid" styleClass="ui-panelgrid-blank ui-fluid">
+                    <p:panelGrid columns="2" id="ingreso" >
+                        <p:outputLabel for="nombreCatalogo" styleClass="p-d-block">Nombre</p:outputLabel>
+                        <p:inputText id="nombreCatalogo" value="#{controladorInicio.admCatalogoNuevo.catNombre}" styleClass="p-d-block"/>
+
+                        <p:outputLabel for="descripcionCatalogo" styleClass="p-d-block">Descripción</p:outputLabel>
+                        <p:inputText id="descripcionCatalogo" value="#{controladorInicio.admCatalogoNuevo.catDescripcion}" styleClass="p-d-block"/>
+                    </p:panelGrid>
+                </p:panelGrid>
+
+                <p:separator/>
+
+                <p:dataTable id="catalogos" var="catalogo" value="#{controladorInicio.admCatalogos}" rowKey="#{catalogo.catId}"
+                             selection="#{controladorInicio.admCatalogoSeleccionado}" selectionMode="single" reflow="true">
+
+                    <p:ajax event="rowSelect" listener="#{controladorInicio.onRowSelect}" update="formulario" />
+                    <p:ajax event="rowUnselect" listener="#{controladorInicio.onRowUnselect}" update="formulario" />
+
+                    <p:column headerText="ID">
+                        <h:outputText value="#{catalogo.catId}" />
+                    </p:column>
+                    <p:column headerText="NOMBRE">
+                        <h:outputText value="#{catalogo.catNombre}" />
+                    </p:column>
+                    <p:column headerText="DESCRIPCION">
+                        <h:outputText value="#{catalogo.catDescripcion}" />
+                    </p:column>
+                    <p:column>
+                        <p:commandButton icon="pi pi-minus" title="Borrar" action="#{controladorInicio.borrar}"
+                                         process="formulario:catalogos"
+                                         update="formulario:catalogos" style="width: 32px;">
+                            <f:setPropertyActionListener value="#{catalogo}" target="#{controladorInicio.admCatalogoABorrar}" />
+                        </p:commandButton>
+                    </p:column>
+                </p:dataTable>
+            </div>
+        </h:form>
+
+    </ui:define>
+
+</ui:composition>
