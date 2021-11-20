@@ -46,7 +46,8 @@ public class AcaAlumno implements Serializable {
     @Column(name = "aln_telefono")
     private String alnTelefono;
 
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "usuario")
+    @JoinColumn(name = "usu_codigo", referencedColumnName = "usu_id")
+    @OneToOne(optional = false)
     private SegUsuario segUsuario;
 
     //bi-directional many-to-one association to AcaMatricula

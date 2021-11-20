@@ -41,15 +41,57 @@
                         <p:outputLabel for="telefono" styleClass="p-d-block">Teléfono</p:outputLabel>
                         <p:inputText id="telefono" value="#{controladorAlumnos.acaAlumnoNuevo.alnTelefono}" styleClass="p-d-block"/>
 
-                        <p:outputLabel for="usuario" styleClass="p-d-block">Código</p:outputLabel>
-                        <p:inputText id="usuario" value="#{controladorAlumnos.acaAlumnoNuevo.alnCodigo}" styleClass="p-d-block"/>
+                        <p:outputLabel for="usuario" styleClass="p-d-block">Usuario relacionado</p:outputLabel>
+                        <p:selectOneMenu id="usuario" value="#{controladorAlumnos.usuarioAsociadoParaNuevo}">
+                            <f:selectItem itemLabel="Seleccione Uno" itemValue="" />
+                            <f:selectItems value="#{controladorAlumnos.usuarios}" var="usuario" itemLabel="#{usuario.usuUsuario}" itemValue="#{usuario}"  />
 
-                        <p:outputLabel for="estado" styleClass="p-d-block">Estado</p:outputLabel>
-                        <p:inputText id="estado" value="#{controladorAlumnos.acaAlumnoNuevo.alnEstado}" styleClass="p-d-block"/>
+                            <p:column style="width:10%">
+                                <h:graphicImage name="showcase/images/themeswitcher/themeswitcher-#{t.name}.png" alt="#{t.name}" styleClass="ui-theme" />
+                            </p:column>
+
+                            <p:column>
+                                <h:outputText value="#{usuario.usuUsuario}" />
+                            </p:column>
+
+                        </p:selectOneMenu>
+
+                        <p:outputLabel for="estado" styleClass="p-d-block">Activo</p:outputLabel>
+                        <p:selectBooleanButton id="estado" value="#{controladorAlumnos.acaAlumnoNuevo.alnEstado}" onLabel="Si" offLabel="No" style="width:60px" />
                     </p:panelGrid>
                 </p:panelGrid>
 
-                
+                <p:separator/>
+
+                <p:dataTable id="catalogos" var="alumno" value="#{controladorAlumnos.alumnos}" rowKey="#{alumno.alnCodigo}"
+                             selection="#{controladorAlumnos.acaAlumnoSeleccionado}" selectionMode="single" reflow="true">
+
+                    <p:ajax event="rowSelect" listener="#{controladorAlumnos.onRowSelect}" update="formulario" />
+                    <p:ajax event="rowUnselect" listener="#{controladorAlumnos.onRowUnselect}" update="formulario" />
+
+                    <p:column headerText="ID">
+                        <h:outputText value="#{alumno.catId}" />
+                    </p:column>
+                    <p:column headerText="NOMBRES y APELLIDOS">
+                        <h:outputText value="#{alumno.alnNombre} #{alumno.alnApellido}" />
+                    </p:column>
+                    <p:column headerText="CORREO">
+                        <h:outputText value="#{alumno.alnCorreo}" />
+                    </p:column>
+                    <p:column headerText="TELEFONO">
+                        <h:outputText value="#{alumno.alnTelefono}" />
+                    </p:column>
+                    <p:column headerText="USUARIO ASOCIADO">
+                        <h:outputText value="#{alumno.segUsuario.usuUsuario}" />
+                    </p:column>
+                    <p:column>
+                        <p:commandButton icon="pi pi-minus" title="Borrar" action="#{controladorAlumnos.borrar}"
+                                         process="formulario:catalogos"
+                                         update="formulario:catalogos" style="width: 32px;">
+                            <f:setPropertyActionListener value="#{catalogo}" target="#{controladorAlumnos.acaAlumnoABorrar}" />
+                        </p:commandButton>
+                    </p:column>
+                </p:dataTable>
             </div>
         </h:form>
 

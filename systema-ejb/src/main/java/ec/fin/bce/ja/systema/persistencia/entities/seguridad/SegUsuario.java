@@ -10,6 +10,7 @@ import ec.fin.bce.ja.systema.persistencia.entities.administracion.AdmCatalogoDet
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -70,9 +71,8 @@ public class SegUsuario implements Serializable {
     @OneToOne(optional = false)
     private SegPersona perId;
 
-    @JoinColumn(name = "usu_codigo", referencedColumnName = "usu_codigo")
-    @OneToOne(optional = false)
-    private AcaAlumno usuario;
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "segUsuario")
+    private AcaAlumno alumno;
 
     @JoinColumn(name = "catdet_tipo_usuario_fk", referencedColumnName = "catdet_id")
     @ManyToOne(optional = false)
@@ -148,12 +148,12 @@ public class SegUsuario implements Serializable {
         this.perId = perId;
     }
 
-    public AcaAlumno getUsuario() {
-        return usuario;
+    public AcaAlumno getAlumno() {
+        return alumno;
     }
 
-    public void setUsuario(AcaAlumno usuario) {
-        this.usuario = usuario;
+    public void setAlumno(AcaAlumno alumno) {
+        this.alumno = alumno;
     }
 
     @Override
