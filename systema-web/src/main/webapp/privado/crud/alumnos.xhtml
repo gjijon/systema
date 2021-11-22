@@ -17,6 +17,8 @@
             <p:toolbar>
                 <p:toolbarGroup align="left">
                     <p:commandButton value="Guardar" action="#{controladorAlumnos.guardar}" update="formulario" icon="pi pi-save"  />
+                    
+                    <p:commandButton value="Nuevo" action="#{controladorAlumnos.reset}" process="@this" update="formulario" icon="pi pi-file-o"  />
                 </p:toolbarGroup>
             </p:toolbar>
             <p:separator/>
@@ -83,7 +85,7 @@
                         <h:outputText value="#{alumno.segUsuario.usuUsuario}" />
                     </p:column>
                     <p:column>
-                        <p:commandButton icon="pi pi-minus" title="Borrar" action="#{controladorAlumnos.borrar}"
+                        <p:commandButton icon="pi pi-trash" title="Borrar" action="#{controladorAlumnos.borrar}"
                                          process="formulario:catalogos"
                                          update="formulario:catalogos" style="width: 32px;">
                             <f:setPropertyActionListener value="#{alumno}" target="#{controladorAlumnos.acaAlumnoABorrar}" />

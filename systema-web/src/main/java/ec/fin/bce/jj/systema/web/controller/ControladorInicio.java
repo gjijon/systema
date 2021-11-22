@@ -27,7 +27,7 @@ public class ControladorInicio implements Serializable {
 
     @Inject
     private AdmCatalogoFacade catalogoFacade;
-    
+
     @Inject
     private SessionManagedBean sessionManagedBean;
 
@@ -70,8 +70,14 @@ public class ControladorInicio implements Serializable {
         }
     }
 
+    public void reset() {
+        admCatalogoNuevo = new AdmCatalogo();
+        admCatalogoSeleccionado = null;
+        admCatalogos = catalogoFacade.findAll();
+    }
+
     public void borrar() {
-        if(admCatalogoABorrar != null ) {
+        if (admCatalogoABorrar != null) {
             catalogoFacade.remove(admCatalogoABorrar);
             LOG.info(String.format("Objeto: %s", admCatalogoABorrar));
             admCatalogos = catalogoFacade.findAll();

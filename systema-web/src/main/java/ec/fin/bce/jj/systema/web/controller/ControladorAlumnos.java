@@ -87,7 +87,7 @@ public class ControladorAlumnos implements Serializable {
         }
     }
 
-    private void reset() {
+    public void reset() {
         acaAlumnoNuevo = new AcaAlumno();
         acaAlumnoSeleccionado = null;
         alumnos = alumnoFacade.findAll();
