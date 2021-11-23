@@ -16,9 +16,11 @@
         <h:form id="formulario">
             <p:toolbar>
                 <p:toolbarGroup align="left">
-                    <p:commandButton value="Guardar" action="#{controladorAlumnos.guardar}" update="formulario" icon="pi pi-save"  />
-                    
+                    <p:commandButton value="Guardar" action="#{controladorAlumnos.guardar}" update="formulario" process="@this, ingreso" icon="pi pi-save"  />
+
                     <p:commandButton value="Nuevo" action="#{controladorAlumnos.reset}" process="@this" update="formulario" icon="pi pi-file-o"  />
+
+                    <p:commandButton value="Nuevo Usuario" type="button" onclick="PF('usrModal').show();" process="@this" update="formulario" icon="pi pi-user-plus"  />
                 </p:toolbarGroup>
             </p:toolbar>
             <p:separator/>
@@ -99,6 +101,22 @@
                 <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="pi pi-check" />
                 <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="pi pi-times" />
             </p:confirmDialog>
+
+            <p:dialog header="Nuevo Usuario" widgetVar="usrModal" modal="true" height="250" width="500">
+                <p:toolbarGroup align="left">
+                    <p:commandButton value="Guardar Usuario" action="#{controladorAlumnos.guardarUsuario}" process="@this, ingresoM" update="formulario" icon="pi pi-save" >
+                        <p:confirm header="Confirmacion" message="Está seguro de guardar el usuario?" icon="pi pi-exclamation-triangle" />
+                    </p:commandButton>
+                </p:toolbarGroup>
+                <p:separator/>
+                <p:panelGrid columns="2" id="ingresoM" layout="grid" styleClass="ui-panelgrid-blank ui-fluid">
+                    <p:outputLabel for="usuarioM">Nombre Usuario</p:outputLabel>
+                    <p:inputText id="usuarioM" value="#{controladorAlumnos.usuarioNuevo.usuUsuario}"/>
+
+                    <p:outputLabel for="nombreM">Clave</p:outputLabel>
+                    <p:password id="nombreM" value="#{controladorAlumnos.usuarioNuevo.usuClave}" />
+                </p:panelGrid>
+            </p:dialog>
         </h:form>
 
     </ui:define>

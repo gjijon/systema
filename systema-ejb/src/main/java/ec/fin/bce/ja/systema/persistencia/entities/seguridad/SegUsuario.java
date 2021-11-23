@@ -68,7 +68,7 @@ public class SegUsuario implements Serializable {
     private Date usuFechaCambioClave;
 
     @JoinColumn(name = "per_id", referencedColumnName = "per_id")
-    @OneToOne(optional = false)
+    @OneToOne(optional = true)
     private SegPersona perId;
 
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "segUsuario")
