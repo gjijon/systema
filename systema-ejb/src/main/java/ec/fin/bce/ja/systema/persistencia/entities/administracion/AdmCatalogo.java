@@ -29,10 +29,12 @@ import javax.xml.bind.annotation.XmlTransient;
 @Entity
 @Table(name = "adm_catalogo", catalog = "sch_administracion")
 @NamedQueries({
-    @NamedQuery(name = "AdmCatalogo.findAll", query = "SELECT a FROM AdmCatalogo a"),
-    @NamedQuery(name = "AdmCatalogo.findByCatId", query = "SELECT a FROM AdmCatalogo a WHERE a.catId = :catId"),
-    @NamedQuery(name = "AdmCatalogo.findByCatNombre", query = "SELECT a FROM AdmCatalogo a WHERE a.catNombre = :catNombre"),
-    @NamedQuery(name = "AdmCatalogo.findByCatDescripcion", query = "SELECT a FROM AdmCatalogo a WHERE a.catDescripcion = :catDescripcion")})
+    @NamedQuery(name = "findAll", query = "SELECT a FROM AdmCatalogo a"),
+    @NamedQuery(name = "findByCatId", query = "SELECT a FROM AdmCatalogo a WHERE a.catId = :catId"),
+    @NamedQuery(name = "findByCatNombre", query = "SELECT a FROM AdmCatalogo a WHERE a.catNombre = :catNombre"),
+    @NamedQuery(name = "findByCatDescripcion", query = "SELECT a FROM AdmCatalogo a WHERE a.catDescripcion = :catDescripcion"),
+    @NamedQuery(name = "findByAllParameters", query = "SELECT a FROM AdmCatalogo a WHERE a.catDescripcion = :catDescripcion and a.catId = :catId and a.catNombre = :catNombre")
+})
 public class AdmCatalogo implements Serializable {
 
     private static final long serialVersionUID = 1L;

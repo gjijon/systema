@@ -23,11 +23,11 @@
             <div id="content" class="left_content">
                 <h:form>
                     <p:menubar >
-                        <p:menuitem value="Tipo Catalogo (una entidad)" action="catalogos.bce?faces-redirect=true" icon="pi pi-sitemap" />
-                        <p:menuitem value="Alumnos (entidad relacionada)" action="alumnos.bce?faces-redirect=true" icon="pi pi-users" />
+                        <p:menuitem value="Tipo Catalogo (una entidad)" action="/privado/crud/catalogos.bce?faces-redirect=true" icon="pi pi-sitemap" />
+                        <p:menuitem value="Alumnos (entidad relacionada)" action="/privado/crud/alumnos.bce?faces-redirect=true" icon="pi pi-users" />
                         <p:submenu label="Consultas" icon="pi pi-file-o">
-                            <p:menuitem value="Catálogos (JPQL)" url="http://www.primefaces.org" icon="pi pi-clone" />
-                            <p:menuitem value="Alumnos (Criteria)" url="http://www.primefaces.org" icon="pi pi-clone" />
+                            <p:menuitem value="Catálogos (JPQL)" action="/privado/reportes/catalogosJpql.bce?faces-redirect=true" icon="pi pi-sitemap" />
+                            <p:menuitem value="Alumnos (Criteria)" action="/privado/reportes/alumnosCriteria.bce?faces-redirect=true" icon="pi pi-users" />
                         </p:submenu>
 
                         <f:facet name="options">

@@ -1,0 +1,124 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                template="./../../recursos/template.xhtml">
+
+    <f:metadata>
+        <f:event type="preRenderView" listener="#{sessionManagedBean.setPantallaActual('Reporte Criteria - Alumnos')}"/>
+    </f:metadata>
+
+
+    <ui:define name="content">
+        <h:form id="formulario">
+            <p:toolbar>
+                <p:toolbarGroup align="left">
+                    <p:commandButton value="Guardar" action="#{controladorAlumnos.guardar}" update="formulario" process="@this, ingreso" icon="pi pi-save"  />
+
+                    <p:commandButton value="Nuevo" action="#{controladorAlumnos.reset}" process="@this" update="formulario" icon="pi pi-file-o"  />
+
+                    <p:commandButton value="Nuevo Usuario" type="button" onclick="PF('usrModal').show();" process="@this" update="formulario" icon="pi pi-user-plus"  />
+                </p:toolbarGroup>
+            </p:toolbar>
+            <p:separator/>
+            <div class="ui-fluid">
+                <p:panelGrid columns="2" id="ingreso" columnClasses="ui-g-12 ui-md-2,ui-g-12 ui-md-4,ui-g-12 ui-md-2,ui-g-12 ui-md-4" layout="grid" styleClass="ui-panelgrid-blank ui-fluid">
+                    <p:outputLabel for="identificacion" styleClass="p-d-block">Identificación</p:outputLabel>
+                    <p:inputText id="identificacion" value="#{controladorAlumnos.acaAlumnoNuevo.alnIdentificacion}" styleClass="p-d-block"/>
+
+                    <p:outputLabel for="nombre" styleClass="p-d-block">Nombre</p:outputLabel>
+                    <p:inputText id="nombre" value="#{controladorAlumnos.acaAlumnoNuevo.alnNombre}" styleClass="p-d-block"/>
+
+                    <p:outputLabel for="apellido" styleClass="p-d-block">Apellido</p:outputLabel>
+                    <p:inputText id="apellido" value="#{controladorAlumnos.acaAlumnoNuevo.alnApellido}" styleClass="p-d-block"/>
+
+                    <p:outputLabel for="direccion" styleClass="p-d-block">Dirección</p:outputLabel>
+                    <p:inputText id="direccion" value="#{controladorAlumnos.acaAlumnoNuevo.alnDireccion}" styleClass="p-d-block"/>
+
+                    <p:outputLabel for="correo" styleClass="p-d-block">Correo</p:outputLabel>
+                    <p:inputText id="correo" value="#{controladorAlumnos.acaAlumnoNuevo.alnCorreo}" styleClass="p-d-block"/>
+
+                    <p:outputLabel for="telefono" styleClass="p-d-block">Teléfono</p:outputLabel>
+                    <p:inputText id="telefono" value="#{controladorAlumnos.acaAlumnoNuevo.alnTelefono}" styleClass="p-d-block"/>
+
+                    <p:outputLabel for="usuario" styleClass="p-d-block">Usuario relacionado</p:outputLabel>
+                    <p:selectOneMenu id="usuario" value="#{controladorAlumnos.usuarioAsociadoParaNuevo}" converter="omnifaces.SelectItemsConverter">
+                        <f:selectItem itemLabel="Seleccione Uno" itemValue="" />
+                        <f:selectItems value="#{controladorAlumnos.usuarios}" var="usuario" itemLabel="#{usuario.usuUsuario}" itemValue="#{usuario}"  />
+
+                        <p:column style="width:10%">
+                            <h:graphicImage name="showcase/images/themeswitcher/themeswitcher-#{t.name}.png" alt="#{t.name}" styleClass="ui-theme" />
+                        </p:column>
+
+                        <p:column>
+                            <h:outputText value="#{usuario.usuUsuario}" />
+                        </p:column>
+
+                    </p:selectOneMenu>
+
+                    <p:outputLabel for="estado" styleClass="p-d-block">Activo</p:outputLabel>
+                    <p:selectBooleanButton id="estado" value="#{controladorAlumnos.acaAlumnoNuevo.alnEstado}" onLabel="Si" offLabel="No" style="width:60px" />
+                </p:panelGrid>
+
+                <p:separator/>
+
+                <p:dataTable id="catalogos" var="alumno" value="#{controladorAlumnos.alumnos}" rowKey="#{alumno.alnCodigo}"
+                             selection="#{controladorAlumnos.acaAlumnoSeleccionado}" selectionMode="single" reflow="true">
+
+                    <p:ajax event="rowSelect" listener="#{controladorAlumnos.onRowSelect}" update="formulario" />
+                    <p:ajax event="rowUnselect" listener="#{controladorAlumnos.onRowUnselect}" update="formulario" />
+
+                    <p:column headerText="ID">
+                        <h:outputText value="#{alumno.alnCodigo}" />
+                    </p:column>
+                    <p:column headerText="NOMBRES y APELLIDOS">
+                        <h:outputText value="#{alumno.alnNombre} #{alumno.alnApellido}" />
+                    </p:column>
+                    <p:column headerText="CORREO">
+                        <h:outputText value="#{alumno.alnCorreo}" />
+                    </p:column>
+                    <p:column headerText="TELEFONO">
+                        <h:outputText value="#{alumno.alnTelefono}" />
+                    </p:column>
+                    <p:column headerText="USUARIO ASOCIADO">
+                        <h:outputText value="#{alumno.segUsuario.usuUsuario}" />
+                    </p:column>
+                    <p:column>
+                        <p:commandButton icon="pi pi-trash" title="Borrar" action="#{controladorAlumnos.borrar}"
+                                         process="formulario:catalogos"
+                                         update="formulario:catalogos" style="width: 32px;">
+                            <f:setPropertyActionListener value="#{alumno}" target="#{controladorAlumnos.acaAlumnoABorrar}" />
+                            <p:confirm header="Confirmacion" message="Está seguro de borrar este registro?" icon="pi pi-exclamation-triangle" />
+                        </p:commandButton>
+                    </p:column>
+                </p:dataTable>
+            </div>
+
+            <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="pi pi-check" />
+                <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="pi pi-times" />
+            </p:confirmDialog>
+
+            <p:dialog header="Nuevo Usuario" widgetVar="usrModal" modal="true" height="250" width="500">
+                <p:toolbarGroup align="left">
+                    <p:commandButton value="Guardar Usuario" action="#{controladorAlumnos.guardarUsuario}" process="@this, ingresoM" update="formulario" icon="pi pi-save" >
+                        <p:confirm header="Confirmacion" message="Está seguro de guardar el usuario?" icon="pi pi-exclamation-triangle" />
+                    </p:commandButton>
+                </p:toolbarGroup>
+                <p:separator/>
+                <p:panelGrid columns="2" id="ingresoM" layout="grid" styleClass="ui-panelgrid-blank ui-fluid">
+                    <p:outputLabel for="usuarioM">Nombre Usuario</p:outputLabel>
+                    <p:inputText id="usuarioM" value="#{controladorAlumnos.usuarioNuevo.usuUsuario}"/>
+
+                    <p:outputLabel for="nombreM">Clave</p:outputLabel>
+                    <p:password id="nombreM" value="#{controladorAlumnos.usuarioNuevo.usuClave}" />
+                </p:panelGrid>
+            </p:dialog>
+        </h:form>
+
+    </ui:define>
+
+</ui:composition>

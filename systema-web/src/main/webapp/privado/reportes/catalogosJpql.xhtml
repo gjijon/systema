@@ -1,0 +1,70 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://java.sun.com/jsf/core"
+                xmlns:h="http://java.sun.com/jsf/html"
+                template="./../../recursos/template.xhtml">
+
+    <f:metadata>
+        <f:event type="preRenderView" listener="#{sessionManagedBean.setPantallaActual('Reporte JPQL - Catálogos')}"/>
+    </f:metadata>
+
+    <ui:define name="content">
+        <h:form>
+            <div class="fluid">
+                <p:spacer height="30"/>
+                
+                <p:panelGrid columns="2" id="ingreso" columnClasses="ui-g-12 ui-md-3,ui-g-12 ui-md-3,ui-g-12 ui-md-3,ui-g-12 ui-md-3" layout="grid" styleClass="ui-panelgrid-blank ui-fluid">
+                    <p:outputLabel for="@next" value="Consultar por: "/>
+                    <p:selectOneMenu id="tipoConsulta" value="#{reporteCatalogo.seleccion}">
+                        <f:selectItem itemLabel="Seleccione una opción" itemValue=""/>
+                        <f:selectItems value="#{reporteCatalogo.menu}"/>
+                        <p:ajax event="change" update="atributos" process="@this" />
+                    </p:selectOneMenu>
+                </p:panelGrid>
+                
+                <p:spacer height="30"/>
+
+                <p:panelGrid  columns="2" id="atributos" columnClasses="ui-g-12 ui-md-3,ui-g-12 ui-md-3,ui-g-12 ui-md-3,ui-g-12 ui-md-3" layout="grid" styleClass="ui-panelgrid-blank ui-fluid panelGridCenter">
+                    <p:outputLabel for="@next" value="Identificación" 
+                                   rendered="#{(reporteCatalogo.seleccion == reporteCatalogo.menu.get(0)) || (reporteCatalogo.seleccion == reporteCatalogo.menu.get(3))}"/>
+                    <p:inputText id="idCatalogo" value="#{reporteCatalogo.catalogoConsulta.catId}" styleClass="p-d-block" 
+                                 rendered="#{(reporteCatalogo.seleccion == reporteCatalogo.menu.get(0)) || (reporteCatalogo.seleccion == reporteCatalogo.menu.get(3))}"/>
+                    
+                    <p:outputLabel for="@next" value="Nombre" 
+                                   rendered="#{(reporteCatalogo.seleccion == reporteCatalogo.menu.get(1)) || (reporteCatalogo.seleccion == reporteCatalogo.menu.get(3))}"/>
+                    <p:inputText id="nombreCatalogo" value="#{reporteCatalogo.catalogoConsulta.catNombre}" styleClass="p-d-block" 
+                                 rendered="#{(reporteCatalogo.seleccion == reporteCatalogo.menu.get(1)) || (reporteCatalogo.seleccion == reporteCatalogo.menu.get(3))}"/>
+
+                    <p:outputLabel for="@next" value="Descripción" 
+                                   rendered="#{(reporteCatalogo.seleccion == reporteCatalogo.menu.get(2)) || (reporteCatalogo.seleccion == reporteCatalogo.menu.get(3))}"/>
+                    <p:inputText id="descripcionCatalogo" value="#{reporteCatalogo.catalogoConsulta.catDescripcion}" styleClass="p-d-block" 
+                                 rendered="#{(reporteCatalogo.seleccion == reporteCatalogo.menu.get(2)) || (reporteCatalogo.seleccion == reporteCatalogo.menu.get(3))}"/>
+
+                    <p:commandButton value="Consultar" action="#{reporteCatalogo.consultar()}" process="tipoConsulta atributos" update="@form" icon="pi pi-save" rendered="#{reporteCatalogo.seleccion != ''}" />
+                    <p:commandButton value="Reiniciar" action="#{reporteCatalogo.inicializar()}" process="@this" update="@form" icon="pi pi-file-o"  rendered="#{reporteCatalogo.seleccion != ''}"/>
+                </p:panelGrid>
+                
+                <p:spacer height="30"/>
+                
+                <p:dataTable id="catalogos" var="catalogo" value="#{reporteCatalogo.listaCatalogos}" rowKey="#{catalogo.catId}"
+                             reflow="true">
+                    <p:column headerText="ID">
+                        <h:outputText value="#{catalogo.catId}" />
+                    </p:column>
+                    <p:column headerText="NOMBRE">
+                        <h:outputText value="#{catalogo.catNombre}" />
+                    </p:column>
+                    <p:column headerText="DESCRIPCION">
+                        <h:outputText value="#{catalogo.catDescripcion}" />
+                    </p:column>
+                </p:dataTable>
+                
+                <p:spacer height="30"/>
+            </div>
+        </h:form>
+    </ui:define>
+
+</ui:composition>
