@@ -81,6 +81,7 @@ public class ControladorInicio implements Serializable {
             catalogoFacade.remove(admCatalogoABorrar);
             LOG.info(String.format("Objeto: %s", admCatalogoABorrar));
             admCatalogos = catalogoFacade.findAll();
+            FacesContext.getCurrentInstance().addMessage("Borrado", new FacesMessage(FacesMessage.SEVERITY_INFO, "Borrado", "Catálogo Eliminado"));
         }
     }
 

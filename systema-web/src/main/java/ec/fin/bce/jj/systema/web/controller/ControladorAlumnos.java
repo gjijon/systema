@@ -124,6 +124,7 @@ public class ControladorAlumnos implements Serializable {
             alumnoFacade.remove(acaAlumnoABorrar);
             LOG.info(String.format("Objeto: %s", acaAlumnoABorrar));
             alumnos = alumnoFacade.findAll();
+            FacesContext.getCurrentInstance().addMessage("Borrado", new FacesMessage(FacesMessage.SEVERITY_INFO, "Borrado", "Alumno Eliminado"));
         }
     }
 
